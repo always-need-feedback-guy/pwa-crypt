@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asset Vault</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="manifest" href="manifest.json">
+    <style>
+        body { font-family: system-ui, sans-serif; }
+    </style>
+</head>
+<body class="bg-zinc-950 text-white min-h-screen">
+    <div class="max-w-md mx-auto p-6">
+        <h1 class="text-3xl font-bold text-center mb-8 text-emerald-400">Asset Vault</h1>
+        
+        <div class="bg-zinc-900 rounded-2xl p-6 shadow-xl">
+            <input type="file" id="fileInput" class="block w-full text-sm text-zinc-400 file:mr-4 file:py-3 file:px-6 file:rounded-xl file:border-0 file:text-sm file:font-medium file:bg-emerald-600 file:text-white hover:file:bg-emerald-500 mb-6">
+            
+            <button onclick="encryptAndSave()" 
+                    class="w-full bg-emerald-600 hover:bg-emerald-500 py-4 rounded-xl font-semibold text-lg transition">
+                Encrypt & Download
+            </button>
+        </div>
+
+        <div id="status" class="mt-6 text-center text-sm"></div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
