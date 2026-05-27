@@ -1,4 +1,3 @@
-# --- START MODULE_ID --- NETWORK_HOOK
 async function dispatchCloudAssembly(targetPayload) {
   // Personal access token used to authenticate to the cloud infrastructure interface
   const token = "YOUR_MEGATRON_PAT_TOKEN"; 
@@ -22,7 +21,6 @@ async function dispatchCloudAssembly(targetPayload) {
     console.error("Cloud dispatch failed:", response.statusText);
   }
 }
-# --- END MODULE_ID --- NETWORK_HOOK
 
 async function encryptAndSave() {
     const fileInput = document.getElementById('fileInput');
@@ -39,7 +37,6 @@ async function encryptAndSave() {
     reader.onload = async function(e) {
         const data = new Uint8Array(e.target.result);
 
-        // Strong browser encryption (Web Crypto API)
         const encoder = new TextEncoder();
         const keyMaterial = await crypto.subtle.importKey(
             "raw", encoder.encode(passphrase), { name: "PBKDF2" }, false, ["deriveBits", "deriveKey"]
@@ -53,7 +50,6 @@ async function encryptAndSave() {
         const iv = crypto.getRandomValues(new Uint8Array(12));
         const encrypted = await crypto.subtle.encrypt({ name: "AES-GCM", iv: iv }, key, data);
 
-        // Save as .enc file locally
         const blob = new Blob([salt, iv, new Uint8Array(encrypted)], { type: 'application/octet-stream' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
@@ -64,7 +60,6 @@ async function encryptAndSave() {
 
         status.textContent = "Encrypted file saved! Triggering cloud compilation...";
 
-        // Realignment Bridge: Automatically hand off the encrypted target identity to the cloud pipeline
         await dispatchCloudAssembly(encryptedFileName);
         
         status.textContent = "Encrypted file saved & Cloud compiler engaged!";
